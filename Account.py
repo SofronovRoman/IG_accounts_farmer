@@ -66,11 +66,11 @@ class Account:
     def check_ban(self):
         try:
             WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.CLASS_NAME, 'x1swlcf7.xh8yej3.xixxii4')))
-            print(f'\033[1;31mАккаунт {self.login} заблокирован\033[00m')
+            print(f'\033[1;31mАккаунт заблокирован\033[00m')
             return True
         except:
             print('')
-            print(f'\033[0;92mПризнак блокировки {self.login} не обнаружен\033[00m')
+            print(f'\033[0;92mПризнак блокировки аккаунта не обнаружен\033[00m')
             return False
 
     def create_post(self, path_to_file: str):
@@ -124,11 +124,11 @@ class Account:
                         time.sleep(2)
                 except:
                     pass
-            print(f'\033[0;92mУспешная загрузка аватара для {self.login}\033[00m')
+            print(f'\033[0;92mУспешная загрузка аватара\033[00m')
             return True
         except Exception as e:
             print('')
-            print(f'\033[1;31mНеудачная загрузка аватара для {self.login}\033[00m')
+            print(f'\033[1;31mНеудачная загрузка аватара\033[00m')
             print(e)
             return False
 
@@ -149,7 +149,7 @@ class Account:
             print(f'\033[0;92mУспешный лайк фото\033[00m')
         except Exception as e:
             print('')
-            print(f'\033[1;31mНеудачный лайк фото для {self.login}\033[00m')
+            print(f'\033[1;31mНеудачный лайк {i} фото\033[00m')
             print(e)
             return False
 
@@ -185,11 +185,11 @@ class Account:
             if Phone_number:
                 WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.ID, 'pepPhone Number'))).send_keys(Phone_number)
             WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, '_acan._acap._acas._aj1-'))).click()
-            print(f'\033[0;92mУдачное изменение данных для {self.login}\033[00m')
+            print(f'\033[0;92mУдачное изменение данных\033[00m')
             return True
         except Exception as e:
             print('')
-            print(f'\033[1;31mНеудачное изменение данных для {self.login}\033[00m')
+            print(f'\033[1;31mНеудачное изменение данных\033[00m')
             print(e)
             return False
 
