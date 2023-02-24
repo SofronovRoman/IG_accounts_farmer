@@ -55,7 +55,7 @@ class Account:
             if button.text == 'Follow' or button.text == 'Follow Back':
                 button.click()
             if button.text == 'Following':
-                print(f'аккаунт уже подписан на {nickname}')
+                print(f'Аккаунт уже подписан на {nickname}')
             return True
         except Exception as e:
             print('')
@@ -153,7 +153,7 @@ class Account:
             print(e)
             return False
 
-    def like_all_photos_of_nickname(self, nickname) -> bool:
+    def like_all_photos_of_nickname(self, nickname: str) -> bool:
         try:
             self.driver.get(f'https://instagram.com/{nickname}')
             pictures = WebDriverWait(self.driver, 10).until(lambda d: d.find_elements(By.CLASS_NAME, "_aagu"))
@@ -185,11 +185,13 @@ class Account:
             if Phone_number:
                 WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.ID, 'pepPhone Number'))).send_keys(Phone_number)
             WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, '_acan._acap._acas._aj1-'))).click()
-            print(f'\033[0;92mНеудачное изменение данных для {self.login}\033[00m')
+            print(f'\033[0;92mУдачное изменение данных для {self.login}\033[00m')
+            return True
         except Exception as e:
             print('')
             print(f'\033[1;31mНеудачное изменение данных для {self.login}\033[00m')
             print(e)
+            return False
 
     def get_information_about_nickname(self, nickname: str) -> dict:
         try:

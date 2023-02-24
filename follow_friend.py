@@ -54,7 +54,7 @@ def main():
     if account.auth(mail, password, cookies):
         count = 0
         # определяем количество аккаунтов, на которое планируем подписаться
-        while count < 5:
+        while count < 2:
             # проверяем, что взятый в базе данных nickname не является нашим nickname
             x = random.randint(0, len(list_of_id) - 1)
             j = list_of_id[x][0]
