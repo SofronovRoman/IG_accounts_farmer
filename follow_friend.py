@@ -49,9 +49,9 @@ def main():
     driver = settings(ua, use_proxy=False)
     cookies = ast.literal_eval(cookies[1:-1])
     # создаем экземпляр класса Account
-    account = Account(driver, mail, password, cookies)
+    account = Account(driver)
     # если авторизация успешна
-    if account.auth():
+    if account.auth(mail, password, cookies):
         count = 0
         # определяем количество аккаунтов, на которое планируем подписаться
         while count < 5:

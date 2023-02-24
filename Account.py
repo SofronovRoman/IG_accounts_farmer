@@ -14,40 +14,37 @@ import time
 
 
 class Account:
-    def __init__(self, driver, login: str, password: str, cookies: tuple):
+    def __init__(self, driver):
         self.driver = driver
-        self.login = login
-        self.password = password
-        self.cookies = cookies
 
-    def auth(self) -> bool:
+    def auth(self, login: str, password: str, cookies: tuple) -> bool:
         try:
-            if self.cookies:
+            if cookies:
                 self.driver.get('https://instagram.com')
-                for cookie in self.cookies:
+                for cookie in cookies:
                     self.driver.add_cookie(cookie)
                 self.driver.get('https://www.instagram.com/accounts/edit/')
                 WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.CLASS_NAME, '_ab6-')))
-                print(f'\033[0;92mВход в {self.login} выполнен через cookie\033[00m')
+                print(f'\033[0;92mВход в {login} выполнен через cookie\033[00m')
                 return True
         except:
             pass
         try:
-            if self.login and self.password:
-                WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.NAME, 'username'))).send_keys(self.login)
-                WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.NAME, 'password'))).send_keys(self.password)
+            if login and password:
+                WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.NAME, 'username'))).send_keys(login)
+                WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.NAME, 'password'))).send_keys(password)
                 time.sleep(2)
                 WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.NAME, 'password'))).send_keys(
                     Keys.ENTER)
                 time.sleep(3)
                 self.driver.get('https://www.instagram.com/accounts/edit/')
                 WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.CLASS_NAME, '_ab6-')))
-                print(f'\033[0;92mВход в {self.login} выполнен через ввод пароля\033[00m')
+                print(f'\033[0;92mВход в {login} выполнен через ввод пароля\033[00m')
                 return True
         except:
             pass
         print('')
-        print(f'\033[1;31mВход в аккаунт {self.login} не выполнен\033[00m')
+        print(f'\033[1;31mВход в аккаунт {login} не выполнен\033[00m')
         return False
 
     def follow_friend(self, nickname: str) -> bool:
