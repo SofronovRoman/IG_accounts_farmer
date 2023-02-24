@@ -51,8 +51,8 @@ def main():
     mail, password, ua, cookies, nickname = record[0][0], record[0][1], record[0][2], record[0][3], record[0][4]
     driver = settings(ua, use_proxy=False)
     cookies = ast.literal_eval(cookies[1:-1])
-    account = Account(driver, mail, password, cookies)
-    if account.auth():
+    account = Account(driver)
+    if account.auth(mail, password, cookies):
         path_to_file = 'add absolute path here'
         account.create_post(path_to_file)
         os.remove(path_to_file)
